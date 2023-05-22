@@ -30,10 +30,12 @@ Table name : todos
 Table Comment : Todos
 
 Columns
-Column_name    Column_type                 default_value    Nullable    Unique
-id             Integer (auto-increment)                     False       True
-task           Text                                         False       False
-completed      Boolean                     False            False       False
+
+| Column_name | Column_type              | default_value | Nullable | Unique |
+| ----------- | ------------------------ | ------------- | -------- | ------ |
+| id          | Integer (auto-increment) |               | False    | True   |
+| task        | Text                     |               | False    | False  |
+| completed   | Boolean                  | False         | False    | False  |
 
 Primary Keys :  id
 
@@ -46,6 +48,7 @@ Cliquer sur le bouton Add Table.
 Modifier les variables du fichier .env.local :
 
 REACT_APP_HASURA_GRAPHQL_URL = '<URL de votre projet GraphQL API>'
+
 REACT_APP_HASURA_ADMIN_SECRET = '<Mot de passe Admin Secret de votre projet>'
 
 ### Lancement de l'API
