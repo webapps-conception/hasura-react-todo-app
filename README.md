@@ -27,6 +27,7 @@ Le schéma public doit apparaître à l'écran.
 Ensuite, sur le schéma public, cliquer sur le bouton Create Table
 
 Table name : todos
+
 Table Comment : Todos
 
 Columns
@@ -46,24 +47,24 @@ Cliquer sur le bouton Add Table.
 ## API React
 ### Paramétrer l'API
 Modifier les variables du fichier .env.local :
-
+```
 REACT_APP_HASURA_GRAPHQL_URL = '<URL de votre projet GraphQL API>'
-
 REACT_APP_HASURA_ADMIN_SECRET = '<Mot de passe Admin Secret de votre projet>'
+```
 
-### Lancement de l'API
+### Execution de l'API
 `yarn start`
 
 Exécute l'application en mode développement.
 
 Ouvrez [http://localhost:3000](http://localhost:3000) pour l'afficher dans votre navigateur.
 
-### Lancement des tests
+### Tests
 `yarn test`
 
 Lance le testeur en mode montre interactive.
 
-### Lancement de la compilation
+### Compilation
 `yarn build`
 
 Génère l'application pour la production dans le dossier `build`.\
@@ -74,7 +75,8 @@ Votre application est prête à être déployée !
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `yarn eject`
+### Nettoyage de la compilation
+`yarn eject`
 
 **Note: il s'agit d'une opération à sens unique. Une fois que vous avez "éjecté", vous ne pouvez plus revenir en arrière !**
 
