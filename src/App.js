@@ -1,12 +1,30 @@
-import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client"
+import { ApolloClient, ApolloProvider, InMemoryCache, createHttpLink } from "@apollo/client"
+import { setContext } from '@apollo/client/link/context'
 import Tasks from './Tasks'
 import TodoInput from './TodoInput'
 
-const client = new ApolloClient({
-  uri: 'https://tolerant-lark-69.hasura.app/v1/graphql',
+if (! process.env.REACT_APP_HASURA_GRAPHQL_URL) {
+  console.error("Erreur de déclaration de la variable REACT_APP_HASURA_GRAPHQL_URL !")
+}
+
+if (! process.env.REACT_APP_HASURA_ADMIN_SECRET) {
+  console.error("Erreur de déclaration de la variable REACT_APP_HASURA_GRAPHQL_URL !")
+}
+
+const authLink = setContext((_, { headers }) => {
+  return {
   headers: {
-    'x-hasura-admin-secret': 'c2tit6HG7T2o9UL8YkmfYugOmaMrb5dKJNAYFlN6dBzzw5xpHjrbV6wkkRNgiPqr'
-  },
+       ...headers, 'x-hasura-admin-secret': process.env.REACT_APP_HASURA_ADMIN_SECRET
+     }
+   }
+})
+
+const httpLink = createHttpLink({
+  uri: process.env.REACT_APP_HASURA_GRAPHQL_URL,
+})
+
+const client = new ApolloClient({
+  link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
 })
 

@@ -15,13 +15,22 @@ const Tasks = () => {
     return <div className="tasks">Error!</div>
   }
 
-  return (
-    <div className="tasks">
-      {data.todos.map((todo) => (
-        <Task key={todo.id} todo={todo} />
-      ))}
-    </div>
-  )
+  if ( data.todos.length > 0 ) {
+    return (
+      <div className="tasks">
+        {data.todos.map((todo) => (
+          <Task key={todo.id} todo={todo} />
+        ))}
+      </div>
+    )
+  } else {
+    return (
+      <div className="tasks">
+        Aucune tache n'existe dans la base de données...
+      </div>
+    )
+  }
+
 }
 
 export default Tasks

@@ -1,74 +1,82 @@
 # hasura-react-todo-app
 * https://dev.to/pmbanugo/how-to-build-a-graphql-app-with-hasura-postgres-and-react-c89
 
+## Configuration de l'API GraphQL sur Hasura
+Nous stockerons nos données dans une base de données Postgres et fournirons une API GraphQL qui sera utilisée pour ajouter et modifier des données. Nous utiliserons le moteur Hasura GraphQL pour provisionner une API GraphQL qui interagira avec la base de données PostgreSQL.
 
-# Getting Started with Create React App
+Nous allons créer une instance de Hasura sur Hasura Cloud. Hasura Cloud vous offre une API GraphQL distribuée à l'échelle mondiale, entièrement gérée et sécurisée en tant que service. Accédez à cloud.hasura.io/signup pour créer un compte.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Une fois connecté, vous devriez voir une page d'accueil.
 
-## Available Scripts
+Créer un nouveau projet Hasura Free.
 
-In the project directory, you can run:
+Sélectionner la région Frankfurt, Germany (Allemagne) Google Clound, et valider.
 
-### `npm start`
+### Créer la base de données
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Lancer la console Hasura (Launch Concole).
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Pour créer la table sur la console Hasura, rendez-vous dans la section de l'onglet Data et cliquez sur Connect Database, puis choisir Postgres, et cliquer sur le bouton Connect Neon Database.
 
-### `npm test`
+Dans la fenêtre secondaire, cliquer sur Continue with Hasura, et sur Authorize.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Le schéma public doit apparaître à l'écran.
 
-### `npm run build`
+### Créer le modèle de données GraphQL
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Ensuite, sur le schéma public, cliquer sur le bouton Create Table
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Table name : todos
+Table Comment : Todos
+
+Columns
+Column_name    Column_type                 default_value    Nullable    Unique
+id             Integer (auto-increment)                     False       True
+task           Text                                         False       False
+completed      Boolean                     False            False       False
+
+Primary Keys :  id
+
+Unique Keys est automatiquement mis à id.
+
+Cliquer sur le bouton Add Table.
+
+## API React
+### Paramétrer l'API
+Modifier les variables du fichier .env.local :
+
+REACT_APP_HASURA_GRAPHQL_URL = '<URL de votre projet GraphQL API>'
+REACT_APP_HASURA_ADMIN_SECRET = '<Mot de passe Admin Secret de votre projet>'
+
+### Lancement de l'API
+`yarn start`
+
+Exécute l'application en mode développement.
+
+Ouvrez [http://localhost:3000](http://localhost:3000) pour l'afficher dans votre navigateur.
+
+### Lancement des tests
+`yarn test`
+
+Lance le testeur en mode montre interactive.
+
+### Lancement de la compilation
+`yarn build`
+
+Génère l'application pour la production dans le dossier `build`.\
+Il regroupe correctement React en mode production et optimise la construction pour les meilleures performances.
+
+La construction est minifiée et les noms de fichiers incluent les hachages.\
+Votre application est prête à être déployée !
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+### `yarn eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+**Note: il s'agit d'une opération à sens unique. Une fois que vous avez "éjecté", vous ne pouvez plus revenir en arrière !**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Si vous n'êtes pas satisfait de l'outil de construction et des choix de configuration, vous pouvez "éjecter" à tout moment. Cette commande supprimera la dépendance de construction unique de votre projet.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Au lieu de cela, il copiera tous les fichiers de configuration et les dépendances transitives (webpack, Babel, ESLint, etc.) directement dans votre projet afin que vous ayez un contrôle total sur eux. Toutes les commandes sauf `eject` fonctionneront toujours, mais elles pointeront vers les scripts copiés afin que vous puissiez les modifier. À ce stade, vous êtes seul.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Vous n'avez jamais besoin d'utiliser `eject`. L'ensemble de fonctionnalités organisé convient aux déploiements de petite et moyenne taille, et vous ne devriez pas vous sentir obligé d'utiliser cette fonctionnalité. Cependant, nous comprenons que cet outil ne serait pas utile si vous ne pouviez pas le personnaliser lorsque vous êtes prêt.
