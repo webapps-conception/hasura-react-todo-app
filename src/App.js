@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client"
+import Tasks from './Tasks'
+import TodoInput from './TodoInput'
+
+const client = new ApolloClient({
+  uri: 'https://tolerant-lark-69.hasura.app/v1/graphql',
+  headers: {
+    'x-hasura-admin-secret': 'c2tit6HG7T2o9UL8YkmfYugOmaMrb5dKJNAYFlN6dBzzw5xpHjrbV6wkkRNgiPqr'
+  },
+  cache: new InMemoryCache(),
+})
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <ApolloProvider client={client}>
+      <div className="App">
+        <header className="App-header">
+          <p>ToDo App</p>
+        </header>
+        <br />
+        <TodoInput />
+        <Tasks />
+      </div>
+    </ApolloProvider>
+  )
 }
 
-export default App;
+export default App
